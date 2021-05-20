@@ -14,7 +14,7 @@ class ToDoItem{
 
 window.onload = function(){
     let addButton = <HTMLElement>document.querySelector("input[type=button]");
-    addButton.onclick = isValid;
+    addButton.onclick = main;
 }
 
 function main():void{

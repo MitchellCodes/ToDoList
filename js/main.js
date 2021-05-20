@@ -8,7 +8,7 @@ var ToDoItem = (function () {
 }());
 window.onload = function () {
     var addButton = document.querySelector("input[type=button]");
-    addButton.onclick = isValid;
+    addButton.onclick = main;
 };
 function main() {
     if (isValid()) {
