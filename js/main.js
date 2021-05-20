@@ -44,4 +44,13 @@ function getToDoItem() {
     return newTask;
 }
 function displayToDoItem(item) {
+    var incompleteDisplay = document.getElementById("incomplete-items");
+    var itemDiv = document.createElement("div");
+    var taskTitle = document.createElement("h2");
+    taskTitle.innerText = item.title;
+    itemDiv.appendChild(taskTitle);
+    var taskDeadline = document.createElement("p");
+    taskDeadline.innerText = item.deadline.toString();
+    itemDiv.appendChild(taskDeadline);
+    incompleteDisplay.appendChild(itemDiv);
 }

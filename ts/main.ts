@@ -74,11 +74,28 @@ function getToDoItem():ToDoItem{
 }
 
 /**
- * Display given ToDoItem on the webpage
- * @param item The ToDoItem to display
+ * Display given ToDoItem on the webpage.
+ * @param item The ToDoItem to display.
  */
 function displayToDoItem(item:ToDoItem):void{
+    let incompleteDisplay = document.getElementById("incomplete-items");
 
+    // create a <div> to contain each item
+    let itemDiv = document.createElement("div")
+
+    // create a <h2> with the task title,
+    // a <p> with the deadline,
+    // and add both to the div created above
+    let taskTitle = document.createElement("h2");
+    taskTitle.innerText = item.title;
+    itemDiv.appendChild(taskTitle);
+
+    let taskDeadline = document.createElement("p");
+    taskDeadline.innerText = item.deadline.toString();
+    itemDiv.appendChild(taskDeadline);
+
+    // add itemDiv to <div id="incomplete-items">
+    incompleteDisplay.appendChild(itemDiv);
 }
 
 // TASK: Allow user to mark ToDoItem as completed
