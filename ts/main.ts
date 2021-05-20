@@ -80,8 +80,9 @@ function getToDoItem():ToDoItem{
 function displayToDoItem(item:ToDoItem):void{
     let incompleteDisplay = document.getElementById("incomplete-items");
 
-    // create a <div> to contain each item
+    // create a <div class="todo"> to contain each item
     let itemDiv = document.createElement("div")
+    itemDiv.classList.add("todo");
 
     // create a <h2> with the task title,
     // a <p> with the deadline,
@@ -91,7 +92,7 @@ function displayToDoItem(item:ToDoItem):void{
     itemDiv.appendChild(taskTitle);
 
     let taskDeadline = document.createElement("p");
-    taskDeadline.innerText = item.deadline.toString();
+    taskDeadline.innerText = item.deadline.toDateString();
     itemDiv.appendChild(taskDeadline);
 
     // add itemDiv to <div id="incomplete-items">

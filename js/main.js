@@ -46,11 +46,12 @@ function getToDoItem() {
 function displayToDoItem(item) {
     var incompleteDisplay = document.getElementById("incomplete-items");
     var itemDiv = document.createElement("div");
+    itemDiv.classList.add("todo");
     var taskTitle = document.createElement("h2");
     taskTitle.innerText = item.title;
     itemDiv.appendChild(taskTitle);
     var taskDeadline = document.createElement("p");
-    taskDeadline.innerText = item.deadline.toString();
+    taskDeadline.innerText = item.deadline.toDateString();
     itemDiv.appendChild(taskDeadline);
     incompleteDisplay.appendChild(itemDiv);
 }
