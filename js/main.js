@@ -1,8 +1,7 @@
 var picker = datepicker("#deadline");
 picker.setMin(new Date());
 var ToDoItem = (function () {
-    function ToDoItem(title) {
-        this.title = title;
+    function ToDoItem() {
     }
     return ToDoItem;
 }());
@@ -37,6 +36,12 @@ function isValid() {
     return isTitleValid && isDeadlineValid;
 }
 function getToDoItem() {
+    var newTask = new ToDoItem();
+    newTask.title = document.getElementById("title").value;
+    var dateString = document.getElementById("deadline").value;
+    newTask.deadline = new Date(dateString);
+    newTask.isCompleted = false;
+    return newTask;
 }
 function displayToDoItem(item) {
 }

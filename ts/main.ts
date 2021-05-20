@@ -6,10 +6,6 @@ class ToDoItem{
     title:string;
     deadline:Date;
     isCompleted:boolean;
-
-    constructor(title:string){
-        this.title = title;
-    }
 }
 
 window.onload = function(){
@@ -64,7 +60,17 @@ function isValid():boolean{
  * in a ToDoItem object
  */
 function getToDoItem():ToDoItem{
+    let newTask = new ToDoItem();
 
+    // fill newTask with data from the form
+    newTask.title = (<HTMLInputElement>document.getElementById("title")).value;
+
+    let dateString = (<HTMLInputElement>document.getElementById("deadline")).value;
+    newTask.deadline = new Date(dateString);
+
+    newTask.isCompleted = false;
+
+    return newTask;
 }
 
 /**
