@@ -13,10 +13,38 @@ class ToDoItem{
 }
 
 /**
- * Check if form data is valid
+ * Check if form data is valid.
+ * @returns Returns true if the form data is valid.
  */
 function isValid():boolean{
+    let isTitleValid = true;
+    let isDeadlineValid = true;
+    let titleErrorSpan = <HTMLSpanElement>document.getElementById("title-error");
+    let deadlineErrorSpan = <HTMLSpanElement>document.getElementById("deadline-error");
 
+    // reset error messages
+    titleErrorSpan.innerText = "*";
+    deadlineErrorSpan.innerText = "*";
+
+    // test that title is not empty or whitespace
+    let titleInput = (<HTMLInputElement>document.getElementById("title")).value;
+    if (titleInput.trim() == "") {
+        isTitleValid = false;
+        titleErrorSpan.innerText = "Please enter a title for the task.";
+    }
+
+    // test that a date was entered
+    let deadlineInput = (<HTMLInputElement>document.getElementById("deadline")).value;
+    let inputDate = Date.parse(deadlineInput); // returns NaN if deadlineInput is not a date
+    
+    // deadline is invalid if the input is not a date
+    // (still allows for dates in the past to be entered)
+    if (isNaN(inputDate)) {
+        isDeadlineValid = false;
+        deadlineErrorSpan.innerText = "Please enter a deadline date.";
+    }
+
+    return isTitleValid && isDeadlineValid;
 }
 
 /**

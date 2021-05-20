@@ -12,15 +12,19 @@
 
     <form>
         <input id="title" placeholder="Task to add" type="text">
-        <span>*</span>
+        <span id="title-error">*</span>
         <br>
 
         <input id="deadline" placeholder="Deadline" type="text">
-        <span>*</span>
+        <span id="deadline-error">*</span>
         <br>
 
         <input type="button" value="Add item to list">
     </form>
+
+    <h3>ToDo Items</h3>
+    <div id="incomplete-items"></div>
+    <div id="complete-items"></div>
 
     <script src="https://unpkg.com/js-datepicker"></script>
     <script src="js/main.js"></script>
