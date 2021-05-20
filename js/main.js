@@ -6,6 +6,16 @@ var ToDoItem = (function () {
     }
     return ToDoItem;
 }());
+window.onload = function () {
+    var addButton = document.querySelector("input[type=button]");
+    addButton.onclick = isValid;
+};
+function main() {
+    if (isValid()) {
+        var newItem = getToDoItem();
+        displayToDoItem(newItem);
+    }
+}
 function isValid() {
     var isTitleValid = true;
     var isDeadlineValid = true;

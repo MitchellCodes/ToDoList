@@ -12,6 +12,18 @@ class ToDoItem{
     }
 }
 
+window.onload = function(){
+    let addButton = <HTMLElement>document.querySelector("input[type=button]");
+    addButton.onclick = isValid;
+}
+
+function main():void{
+    if (isValid()) {
+        let newItem = getToDoItem();
+        displayToDoItem(newItem);
+    }
+}
+
 /**
  * Check if form data is valid.
  * @returns Returns true if the form data is valid.
