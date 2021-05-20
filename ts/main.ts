@@ -83,6 +83,9 @@ function displayToDoItem(item:ToDoItem):void{
     // create a <div class="todo"> to contain each item
     let itemDiv = document.createElement("div")
     itemDiv.classList.add("todo");
+    itemDiv.classList.add("incompleted");
+
+    itemDiv.onclick = markAsComplete;
 
     // create a <h2> with the task title,
     // a <p> with the deadline,
@@ -99,5 +102,23 @@ function displayToDoItem(item:ToDoItem):void{
     incompleteDisplay.appendChild(itemDiv);
 }
 
-// TASK: Allow user to mark ToDoItem as completed
+function markAsComplete(){
+    let itemDiv = <HTMLDivElement>this;
+
+    if (itemDiv.classList.contains("incompleted")) {
+        itemDiv.classList.remove("incompleted")
+        itemDiv.classList.add("completed");
+
+        let completedItems = document.getElementById("complete-items");
+        completedItems.appendChild(itemDiv);
+    }
+    else {
+        itemDiv.classList.remove("completed");
+        itemDiv.classList.add("incompleted");
+
+        let incompletedItems = document.getElementById("incomplete-items");
+        incompletedItems.appendChild(itemDiv);
+    }
+}
+
 // TASK: Store ToDoItems in web storage
