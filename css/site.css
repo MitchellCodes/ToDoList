@@ -22,11 +22,25 @@
     text-decoration: line-through;
 }
 
-#complete-items{
-    border: .2em solid blue;
+#dark-theme-toggle{
+    position: absolute;
+    top: 1em;
+    right: 1em;
 }
 
-#incomplete-items{
-    border: .2em solid green;
-    margin-bottom: 1em;
+.dark-theme-enabled{
+    background-color: rgb(54, 54, 54);
+    color: darkgray;
+}
+
+.dark-theme-enabled input{
+    background-color: rgb(170, 170, 170);
+}
+
+.dark-theme-enabled .todo{
+    background-color: rgb(100, 100, 177);
+}
+
+.dark-theme-enabled .completed{
+    background-color: rgb(53, 100, 53);
 }

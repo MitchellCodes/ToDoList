@@ -8,6 +8,8 @@ var ToDoItem = (function () {
 window.onload = function () {
     var addButton = document.querySelector("input[type=button]");
     addButton.onclick = main;
+    var themeToggle = document.getElementById("dark-theme-toggle");
+    themeToggle.onclick = toggleDarkTheme;
 };
 function main() {
     if (isValid()) {
@@ -70,5 +72,21 @@ function markAsComplete() {
         itemDiv.classList.add("incompleted");
         var incompletedItems = document.getElementById("incomplete-items");
         incompletedItems.appendChild(itemDiv);
+    }
+}
+function toggleDarkTheme() {
+    var themeDiv = this;
+    var pageBody = document.getElementById("body");
+    if (themeDiv.classList.contains("off")) {
+        themeDiv.classList.remove("off");
+        themeDiv.classList.add("on");
+        pageBody.classList.remove("dark-theme-disabled");
+        pageBody.classList.add("dark-theme-enabled");
+    }
+    else {
+        themeDiv.classList.remove("on");
+        themeDiv.classList.add("off");
+        pageBody.classList.remove("dark-theme-enabled");
+        pageBody.classList.add("dark-theme-disabled");
     }
 }

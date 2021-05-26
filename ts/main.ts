@@ -11,6 +11,9 @@ class ToDoItem{
 window.onload = function(){
     let addButton = <HTMLElement>document.querySelector("input[type=button]");
     addButton.onclick = main;
+
+    let themeToggle = <HTMLElement>document.getElementById("dark-theme-toggle");
+    themeToggle.onclick = toggleDarkTheme;
 }
 
 function main():void{
@@ -118,6 +121,30 @@ function markAsComplete(){
 
         let incompletedItems = document.getElementById("incomplete-items");
         incompletedItems.appendChild(itemDiv);
+    }
+}
+
+/**
+ * Toggles between the classes dark-theme-disabled and dark-theme-enabled on the element with
+ * the id of "body"
+ */
+function toggleDarkTheme():void{
+    let themeDiv = <HTMLDivElement>this;
+    let pageBody = document.getElementById("body");
+
+    if (themeDiv.classList.contains("off")) {
+        themeDiv.classList.remove("off");
+        themeDiv.classList.add("on");
+
+        pageBody.classList.remove("dark-theme-disabled");
+        pageBody.classList.add("dark-theme-enabled");
+    }
+    else {
+        themeDiv.classList.remove("on");
+        themeDiv.classList.add("off");
+
+        pageBody.classList.remove("dark-theme-enabled");
+        pageBody.classList.add("dark-theme-disabled");
     }
 }
 
