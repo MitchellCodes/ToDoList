@@ -12,15 +12,19 @@ window.onload = function(){
     let addButton = <HTMLElement>document.querySelector("input[type=button]");
     addButton.onclick = main;
 
-    loadSavedItem();
+    loadSavedItems();
 
     let themeToggle = <HTMLElement>document.getElementById("dark-theme-toggle");
     themeToggle.onclick = toggleDarkTheme;
 }
 
-function loadSavedItem(){
-    let item = getToDo(); // read from storage
-    displayToDoItem(item);
+function loadSavedItems(){
+    let itemArray = getToDoItems(); // read from storage
+    for(let i = 0; i < itemArray.length; i++){
+        let currItems = itemArray[i];
+        displayToDoItem(currItems);
+    }
+    
 }
 
 function main():void{
@@ -160,21 +164,24 @@ function toggleDarkTheme():void{
 }
 
 function saveToDo(item:ToDoItem):void{
-    // convert ToDoItem into JSON string
-    let itemString = JSON.stringify(item);
+    let currItems = getToDoItems();
+    if(currItems == null){ // if no items are found then make a new array
+        currItems = new Array();
+    }
+    currItems.push(item); // add the new item to currItems list
 
-    // save string
-    localStorage.setItem(todoKey, itemString);
+    let currItemsString = JSON.stringify(currItems);
+    localStorage.setItem(todoKey, currItemsString);
 }
 
 const todoKey = "todo";
 
 /**
- * Get stored ToDo item or return null if
- * one is not found
+ * Get stored ToDo items or return null if
+ * none are found
  */
-function getToDo():ToDoItem{
+function getToDoItems():ToDoItem[]{
     let itemString= localStorage.getItem(todoKey);
-    let item:ToDoItem = JSON.parse(itemString);
+    let item:ToDoItem[] = JSON.parse(itemString);
     return item;
 }
