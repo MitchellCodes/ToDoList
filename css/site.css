@@ -44,3 +44,17 @@
 .dark-theme-enabled .completed{
     background-color: rgb(53, 100, 53);
 }
+
+#complete-items,
+#incomplete-items{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 50%;
+    height: fit-content;
+}
+
+#all-items{
+    display: flex;
+}
