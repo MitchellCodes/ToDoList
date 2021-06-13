@@ -12,14 +12,22 @@ window.onload = function(){
     let addButton = <HTMLElement>document.querySelector("input[type=button]");
     addButton.onclick = main;
 
+    loadSavedItem();
+
     let themeToggle = <HTMLElement>document.getElementById("dark-theme-toggle");
     themeToggle.onclick = toggleDarkTheme;
+}
+
+function loadSavedItem(){
+    let item = getToDo(); // read from storage
+    displayToDoItem(item);
 }
 
 function main():void{
     if (isValid()) {
         let newItem = getToDoItem();
         displayToDoItem(newItem);
+        saveToDo(newItem);
     }
 }
 
@@ -98,7 +106,10 @@ function displayToDoItem(item:ToDoItem):void{
     itemDiv.appendChild(taskTitle);
 
     let taskDeadline = document.createElement("p");
-    taskDeadline.innerText = item.deadline.toDateString();
+    //taskDeadline.innerText = item.deadline.toDateString();
+    let deadline = new Date(item.deadline.toString());
+    taskDeadline.innerText = deadline.toDateString();
+
     itemDiv.appendChild(taskDeadline);
 
     // add itemDiv to <div id="incomplete-items">
@@ -148,4 +159,22 @@ function toggleDarkTheme():void{
     }
 }
 
-// TASK: Store ToDoItems in web storage
+function saveToDo(item:ToDoItem):void{
+    // convert ToDoItem into JSON string
+    let itemString = JSON.stringify(item);
+
+    // save string
+    localStorage.setItem(todoKey, itemString);
+}
+
+const todoKey = "todo";
+
+/**
+ * Get stored ToDo item or return null if
+ * one is not found
+ */
+function getToDo():ToDoItem{
+    let itemString= localStorage.getItem(todoKey);
+    let item:ToDoItem = JSON.parse(itemString);
+    return item;
+}

@@ -8,13 +8,19 @@ var ToDoItem = (function () {
 window.onload = function () {
     var addButton = document.querySelector("input[type=button]");
     addButton.onclick = main;
+    loadSavedItem();
     var themeToggle = document.getElementById("dark-theme-toggle");
     themeToggle.onclick = toggleDarkTheme;
 };
+function loadSavedItem() {
+    var item = getToDo();
+    displayToDoItem(item);
+}
 function main() {
     if (isValid()) {
         var newItem = getToDoItem();
         displayToDoItem(newItem);
+        saveToDo(newItem);
     }
 }
 function isValid() {
@@ -55,7 +61,8 @@ function displayToDoItem(item) {
     taskTitle.innerText = item.title;
     itemDiv.appendChild(taskTitle);
     var taskDeadline = document.createElement("p");
-    taskDeadline.innerText = item.deadline.toDateString();
+    var deadline = new Date(item.deadline.toString());
+    taskDeadline.innerText = deadline.toDateString();
     itemDiv.appendChild(taskDeadline);
     incompleteDisplay.appendChild(itemDiv);
 }
@@ -89,4 +96,14 @@ function toggleDarkTheme() {
         pageBody.classList.remove("dark-theme-enabled");
         pageBody.classList.add("dark-theme-disabled");
     }
+}
+function saveToDo(item) {
+    var itemString = JSON.stringify(item);
+    localStorage.setItem(todoKey, itemString);
+}
+var todoKey = "todo";
+function getToDo() {
+    var itemString = localStorage.getItem(todoKey);
+    var item = JSON.parse(itemString);
+    return item;
 }
